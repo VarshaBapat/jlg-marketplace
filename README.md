@@ -1,4 +1,4 @@
-# *Just Like Granny* Marketplace Project
+# *Just Like Granny* - A two sided Marketplace Project
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  resources :sellers
+  resources :customers
   resources :reviews
   resources :comments
   resources :products

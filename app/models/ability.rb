@@ -9,7 +9,55 @@ class Ability
        user ||= User.new # guest user (not logged in)
        if user.has_role? :admin
         can :manage, :all
-       else
+
+       elsif user.has_role? :customer
+        can :update, Order do |order|
+            order.user == user
+        end
+        can :destroy, Order do |order|
+            order.user == user
+        end
+        
+        
+        can :update, Comment do |comment|
+            comment.user == user
+        end
+        can :destroy, comment do |comment|
+            comment.user == user
+        end
+        
+
+        can :update, Review do |review|
+            review.user == user
+        end
+        can :destroy, Review do |review|
+            review.user == user
+        end
+
+        can :create, Comment
+        can :create, Order
+        can :create, Review
+        can :read, :all
+
+      elsif user.has_role? :seller
+
+        can :update, Product do |product|
+          product.user == user
+        end
+
+        can :destroy, Product do |product|
+          product.user == user
+        end
+
+        can :destroy, Order do |order|
+          order.user == user
+        end
+
+        can :create, Product
+        can :read, :all
+
+
+      else  
          can :read, :all
       end
     #

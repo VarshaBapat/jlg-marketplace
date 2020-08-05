@@ -1,3 +1,13 @@
+<%= <%= simple_form_for @product do |f| %>
+<%= select_tag (:category_id, options_for_select(@categories), :prompt => "Select a category") %>
+<%= f.input :name %>
+<%= f.input :description %>
+<%= f.input :price %>
+
+<% end %>%>
+
+
+
 <%= form_with(model: product, local: true) do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">

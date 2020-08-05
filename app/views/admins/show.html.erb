@@ -1,4 +1,21 @@
-<p id="notice"><%= notice %></p>
+<% if current_user.admin.id == @admin.id %>
+  <%= link_to 'Edit My Account', edit_admin_path(@admin) %>
+<% else %>
+  <%= link_to "Edit Admin's Account", edit_admin_path(@admin) %>
+<% end %>
 
-<%= link_to 'Edit', edit_admin_path(@admin) %> |
-<%= link_to 'Back', admins_path %>
+<br>
+
+
+<p>
+  <strong>First name:</strong>
+  <%= @admin.first_name.capitalize %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @admin.last_name.capitalize %>
+</p>
+
+
+<%= link_to 'Back', admins_path, class: 'btn btn-secondary' %>

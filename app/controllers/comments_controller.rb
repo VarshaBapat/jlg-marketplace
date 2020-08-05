@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  load_and_authorize_resource param_method: :my_sanitizer
 
   # GET /comments
   # GET /comments.json
@@ -24,7 +25,9 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @product = Product.find(params[:product_id])
+    @comment = @product.comments.create(comment_params)
+    @comment.customer_id = current_customer.id if current_customer
 
     respond_to do |format|
       if @comment.save
@@ -64,7 +67,7 @@ class CommentsController < ApplicationController
   private
 
   def my_sanitizer
-    params.require(:comment).permit(:name)
+    params.require(:comment).permit(:body)
   end
 
     # Use callbacks to share common setup or constraints between actions.

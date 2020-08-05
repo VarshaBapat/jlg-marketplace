@@ -34,27 +34,27 @@ class Ability
             review.user == user
         end
 
-        can :create, Comment
-        can :create, Order
-        can :create, Review
-        can :read, :all
+        can :manage, Comment
+        can :manage, User, user_id: user.id
+        can :read, Customer, user_id: user.id
+        can :manage, Order
+        can :manage, Review
+        cannot :read, seller
+        cannot :read, Admin
 
       elsif user.has_role? :seller
 
-        can :update, Product do |product|
-          product.user == user
-        end
-
-        can :destroy, Product do |product|
-          product.user == user
-        end
+        can :manage, Product
 
         can :destroy, Order do |order|
           order.user == user
         end
 
-        can :create, Product
-        can :read, :all
+        
+        can :manage, User, user_id: user.id
+        cannot :read, Admin
+        cannot :read, Customer
+
 
 
       else  

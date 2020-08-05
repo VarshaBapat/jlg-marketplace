@@ -35,6 +35,7 @@ class AdminsController < ApplicationController
   # GET /admins/new
   def new
     @admin = Admin.new
+    authorize! :read, @admin, :message => "You do not have authorization to view that content."
   end
 
   # GET /admins/1/edit
@@ -45,6 +46,7 @@ class AdminsController < ApplicationController
   # POST /admins.json
   def create
     @admin = Admin.new(admin_params)
+    authorize! :read, @admin, :message => "You do not have authorization to view that content."
 
     respond_to do |format|
       if @admin.save
@@ -85,10 +87,13 @@ class AdminsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_admin
       @admin = Admin.find(params[:id])
+      authorize! :read, @admin, :message => "You do not have authorization to view that content."
     end
 
     # Only allow a list of trusted parameters through.
     def admin_params
-      params.fetch(:admin, {})
+     params[:admin][:first_name].capitalize!
+      params[:admin][:last_name].capitalize!
+      params.require(:admin).permit(:first_name, :last_name)
     end
 end

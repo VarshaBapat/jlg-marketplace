@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /products
   # GET /products.json
@@ -14,27 +15,22 @@ class ProductsController < ApplicationController
 
   # GET /products/new
   def new
-    @product = Product.new
+    @product = current_user.products.build
   end
 
   # GET /products/1/edit
   def edit
   end
 
-  # POST /products
-  # POST /products.json
+  
   def create
-    @product = Product.new(product_params)
+    @product = current_user.products.build(product_params)
 
-    respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
+        redirect_to root_path
       else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        render 'new'
       end
-    end
   end
 
   # PATCH/PUT /products/1
@@ -62,13 +58,25 @@ class ProductsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def product_params
-      params.fetch(:product, {})
-    end
+  def product_params
+    params.require(:product).permit(:name, :description, :price, :category_id, :product_img, )
+    
+  end
+
+  def find_product
+    @product = Product.find(params[:id])
+    
+  end
+  
+  
+    # Use callbacks to share common setup or constraints between actions.
+    # def set_product
+    #   @product = Product.find(params[:id])
+    # end
+
+    # # Only allow a list of trusted parameters through.
+    # def product_params
+    #   params.fetch(:product, {})
+    # end
 end

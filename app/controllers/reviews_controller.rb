@@ -1,28 +1,24 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
-  # GET /reviews
-  # GET /reviews.json
+ 
   def index
     @reviews = Review.all
   end
 
-  # GET /reviews/1
-  # GET /reviews/1.json
+  
   def show
   end
 
-  # GET /reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
+  
   def edit
   end
 
-  # POST /reviews
-  # POST /reviews.json
+
   def create
     @review = Review.new(review_params)
 

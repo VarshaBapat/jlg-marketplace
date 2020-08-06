@@ -56,5 +56,5 @@ class ApplicationController < ActionController::Base
       home_path
     end
 end
-© 2020 GitHub, Inc.
+
 end

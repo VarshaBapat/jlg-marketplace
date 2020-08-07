@@ -4,6 +4,9 @@
 <%= if @products.count == 0 %>
     <h1>Oops! Sorry! There are no products currently available in this category</h1>
     <% @products.each do |product| %>
+    
+<% else %>
+
     <h2><%= link_to product.name, product_path(product)  %><h2>
       
         <%= link_to 'Show', product %>
@@ -11,6 +14,8 @@
         <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       
     <% end %>
+
+<% end %>
  
 
 <br>

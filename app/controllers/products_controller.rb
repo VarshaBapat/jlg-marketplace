@@ -11,21 +11,26 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    
   end
 
   # GET /products/new
   def new
+    
     @product = current_user.products.build
     @categories = Category.all.map{ |c| [c.name, c.id] }
   end
 
   # GET /products/1/edit
   def edit
+    @categories = Category.all.map{ |c| [c.name, c.id] }
   end
 
   
   def create
+    # @product = current_user.products.build(product_params)
     @product = current_user.products.build(product_params)
+    @product.category_id = params[:category_id]
 
       if @product.save
         redirect_to root_path
@@ -38,6 +43,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     respond_to do |format|
+      @product.category_id = params[:category_id]
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }

@@ -1,9 +1,8 @@
-<%= <%= simple_form_for @product do |f| %>
-<%= select_tag (:category_id, options_for_select(@categories), :prompt => "Select a category") %>
+<%= simple_form_for @product do |f| %>
 <%= f.input :name %>
 <%= f.input :description %>
 <%= f.input :price %>
-
+<%= f.button :submit %>
 <% end %>%>
 
 

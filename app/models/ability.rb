@@ -7,54 +7,24 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
        user ||= User.new # guest user (not logged in)
-       if user.has_role? :admin
+       if user.admin?
         can :manage, :all
 
-       elsif user.has_role? :customer
-        can :update, Order do |order|
-            order.user == user
-        end
-        can :destroy, Order do |order|
-            order.user == user
-        end
-        
-        
-        can :update, Comment do |comment|
-            comment.user == user
-        end
-        can :destroy, comment do |comment|
-            comment.user == user
-        end
-        
+       elsif user.customer?
+        can :manage, User, user_id: user.id 
+        can :manage, Order, customer_id: user.customer.id 
+        can :read, Customer, user_id: user.id 
+        can :read, Product, customer_id: user.customer.id 
+        cannot :read, Seller
+        cannot :read, Admin 
 
-        can :update, Review do |review|
-            review.user == user
-        end
-        can :destroy, Review do |review|
-            review.user == user
-        end
-
-        can :manage, Comment
-        can :manage, User, user_id: user.id
-        can :read, Customer, user_id: user.id
-        can :manage, Order
-        can :manage, Review
-        cannot :read, seller
-        cannot :read, Admin
-
-      elsif user.has_role? :seller
-
-        can :manage, Product
-
-        can :destroy, Order do |order|
-          order.user == user
-        end
-
-        
-        can :manage, User, user_id: user.id
-        cannot :read, Admin
+      elsif user.seller?
+        can :manage, User, user_id: user.id 
+        can :manage, Product, seller_id: user.seller.id
+        can :read, Order, seller_id: user.seller.id
+        can :read, Seller, user_id: user.id 
         cannot :read, Customer
-
+        cannot :read, Admin
 
 
       else  

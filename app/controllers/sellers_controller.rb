@@ -15,6 +15,7 @@ class SellersController < ApplicationController
   # GET /sellers/new
   def new
     @seller = Seller.new
+    authorize! :read, @seller, :message => "You do not have authorization to view that content."
   end
 
   # GET /sellers/1/edit
@@ -25,16 +26,14 @@ class SellersController < ApplicationController
   # POST /sellers.json
   def create
     @seller = Seller.new(seller_params)
+    @seller.user = current_user
+    authorize! :read, @seller, :message => "You do not have authorization to view that content."
 
-    respond_to do |format|
-      if @seller.save
-        format.html { redirect_to @seller, notice: 'Seller was successfully created.' }
-        format.json { render :show, status: :created, location: @seller }
-      else
-        format.html { render :new }
-        format.json { render json: @seller.errors, status: :unprocessable_entity }
-      end
-    end
+   if @seller.save
+    redirect_to edit_seller_path
+   else
+    render :new
+   end
   end
 
   # PATCH/PUT /sellers/1
@@ -56,7 +55,7 @@ class SellersController < ApplicationController
   def destroy
     @seller.destroy
     respond_to do |format|
-      format.html { redirect_to sellers_url, notice: 'Seller was successfully destroyed.' }
+      format.html { redirect_to sellers_url, notice: 'Seller was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -65,10 +64,14 @@ class SellersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_seller
       @seller = Seller.find(params[:id])
+      authorize! :read, @seller, :message => "You do not have authorization to view that content."
     end
 
     # Only allow a list of trusted parameters through.
     def seller_params
-      params.fetch(:seller, {})
+       params[:seller][:first_name].capitalize!
+      params[:seller][:last_name].capitalize!
+      params[:seller][:phone] = format_phone_number(params[:instructor][:phone])
+      params.require(:seller).permit(:first_name, :last_name, :address, :phone)
     end
 end

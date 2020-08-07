@@ -1,6 +1,8 @@
 <!--<p id="notice"><%= notice %></p>-->
 
-<h1>Products</h1>
+<h1 class="current-category"><%= params[:category] %></h1>
+<%= if @products.count == 0 %>
+    <h1>Oops! Sorry! There are no products currently available in this category</h1>
     <% @products.each do |product| %>
     <h2><%= link_to product.name, product_path(product)  %><h2>
       

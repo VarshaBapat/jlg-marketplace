@@ -2,5 +2,11 @@
 
 <%= render 'form', seller: @seller %>
 
-<%= link_to 'Show', @seller %> |
-<%= link_to 'Back', sellers_path %>
+<br>
+
+<% if current_user.admin? %>
+  <%= link_to 'Back', seller_path, class: 'btn btn-secondary'%>
+<% elsif current_user.seller? %>
+  <%= link_to 'Back', seller_path(current_user.seller.id), class: 'btn btn-outline-secondary'%>
+  <%= link_to 'Change My Password', edit_user_registration_path, class: 'btn btn-outline-danger'%>
+<% end %>

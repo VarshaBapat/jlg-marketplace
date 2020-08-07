@@ -2,5 +2,14 @@
 
 <%= render 'form', customer: @customer %>
 
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>
+<br>
+
+<% if current_user.admin? %>
+  <%= link_to 'Back', customer_path, class: 'btn btn-secondary'%>
+<% elsif current_user.customer? %>
+  <%= link_to 'Back', customer_path(current_user.customer.id), class: 'btn btn-outline-secondary'%>
+  <%= link_to 'Change My Password', edit_user_registration_path, class: 'btn btn-outline-danger'%>
+<% end %>
+
+<!--<%= link_to 'Show', @customer %> |
+<%= link_to 'Back', customers_path %>-->

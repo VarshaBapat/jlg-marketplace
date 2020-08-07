@@ -12,6 +12,10 @@
   <tbody>
     <% @customers.each do |customer| %>
       <tr>
+      <td><%= customer.first_name.capitalize + ' ' + customer.last_name.capitalize if customer.first_name && customer.last_name %></td>
+        <td><%= customer.user.email if customer.user.email %></td>
+        <td><%= customer.address if customer.address %></td>
+        <td><%= "#{customer.phone[0..3]} #{customer.phone[4..6]} #{customer.phone[7..9]}" if customer.phone %></td>
         <td><%= link_to 'Show', customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

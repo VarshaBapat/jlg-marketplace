@@ -1,4 +1,38 @@
-<p id="notice"><%= notice %></p>
+<!--<p id="notice"><%= notice %></p>-->
+
+<% if current_user.admin? %>
+  <%= link_to "Edit Business Account", edit_seller_path(@seller) %>
+<% elsif current_user.seller? %>
+  <%= link_to 'Edit My Account', edit_seller_path(@seller) %>
+<% end %>
+
+<br>
+
+<p>
+  <strong>Name:</strong>
+  <%= if @seller&.first_name&.empty? && @seller&.last_name&.empty?
+    "N/A"
+  else
+    @seller&.first_name&.capitalize + ' ' + @seller&.last_name&.capitalize
+  end %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @seller&.user&.email %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @seller&.address&.empty? ? "N/A" : @seller&.address %>
+</p>
+
+<p>
+  <strong>Mobile:</strong>
+  <%= @seller&.phone&.empty? ? "N/A" : "#{@seller&.phone[0..3]} #{@seller&.phone[4..6]} #{@seller&.phone[7..9]}" %>
+</p>
+
+
 
 <%= link_to 'Edit', edit_seller_path(@seller) %> |
 <%= link_to 'Back', sellers_path %>

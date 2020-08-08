@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :find_product
 
  
   def index
@@ -21,16 +21,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-
-    respond_to do |format|
+    @review.product_id = product.id
+    @review.customer_id = current_customer.id
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
+       redirect_to product_path(@product)
       else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
+        render "new"
       end
-    end
   end
 
   # PATCH/PUT /reviews/1
@@ -59,12 +56,18 @@ class ReviewsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
+    # def set_review
+    #   @review = Review.find(params[:id])
+    # end
 
     # Only allow a list of trusted parameters through.
     def review_params
-      params.fetch(:review, {})
+      params.require(:review).permit(:rating, :comment)
     end
+
+    def find_product
+      @product = Product.find(params[:product_id])
+      
+    end
+    
 end

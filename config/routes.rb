@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   resources :categories
   resources :sellers
   resources :customers
-  resources :reviews
-  resources :products
+  
+  resources :products do
+    resources :reviews
+  end
   
   devise_for :users, controllers: {registrations: 'registrations'}
   root to: "home#index"

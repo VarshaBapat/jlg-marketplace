@@ -1,13 +1,14 @@
+
 <%= simple_form_for @product, :html => { :multipart => true } do |f| %>
 <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Select a category")%>
 <%= f.input :name %>
 <%= f.input :description %>
 <%= f.input :price %>
-<%= f.button :submit %>
-<% end %>%>
+<%= f.button :submit, :class => 'btn-custom2' %>
+<% end %>
 
 
-
+<!--
 <%= form_with(model: product, local: true) do |form| %>
   <% if product.errors.any? %>
     <div id="error_explanation">
@@ -25,3 +26,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+-->

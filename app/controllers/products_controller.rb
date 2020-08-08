@@ -5,8 +5,8 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    if params[:category].blank
-    @products = Product.all
+    if params[:category].blank?
+              @products = Product.all
     else
       @category_id = Category.find_by(name: params[:category]).id
       @products = Product.where(:category_id => @category_id).order("created_at_DESC")
@@ -81,13 +81,6 @@ class ProductsController < ApplicationController
   end
   
   
-    # Use callbacks to share common setup or constraints between actions.
-    # def set_product
-    #   @product = Product.find(params[:id])
-    # end
-
-    # # Only allow a list of trusted parameters through.
-    # def product_params
-    #   params.fetch(:product, {})
-    # end
+    
+end
 end

@@ -71,7 +71,7 @@ class SellersController < ApplicationController
     def seller_params
        params[:seller][:first_name].capitalize!
       params[:seller][:last_name].capitalize!
-      params[:seller][:phone] = format_phone_number(params[:instructor][:phone])
+      params[:seller][:phone] = format_phone_number(params[:seller][:phone])
       params.require(:seller).permit(:first_name, :last_name, :address, :phone)
     end
 end

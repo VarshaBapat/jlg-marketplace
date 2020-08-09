@@ -10,31 +10,36 @@ class ProductsController < ApplicationController
     else
       @category_id = Category.find_by(name: params[:category]).id
       @products = Product.where(:category_id => @category_id).order("created_at_DESC")
+    end
   end
 
-  # GET /products/1
-  # GET /products/1.json
+ 
   def show
+
+    if @product.reviews.blank?
+			@average_review = 0
+		else
+			@average_review = @product.reviews.average(:rating).round(2)
+    end
     
   end
-
-  # GET /products/new
+ 
   def new
-    
+    @product = Product.new
     @product = current_user.products.build
     @categories = Category.all.map{ |c| [c.name, c.id] }
   end
 
-  # GET /products/1/edit
+  
   def edit
-    @categories = Category.all.map{ |c| [c.name, c.id] }
+   @categories = Category.all.map{ |c| [c.name, c.id] }
   end
 
   
   def create
-    # @product = current_user.products.build(product_params)
     @product = current_user.products.build(product_params)
     @product.category_id = params[:category_id]
+    #@product.user_id = current_user.id
 
       if @product.save
         redirect_to root_path
@@ -52,8 +57,7 @@ class ProductsController < ApplicationController
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
-        format.html { render :edit }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+        render 'edit'
       end
     end
   end
@@ -62,10 +66,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+   redirect_to root_path
   end
 
   private
@@ -80,7 +81,4 @@ class ProductsController < ApplicationController
     
   end
   
-  
-    
-end
 end

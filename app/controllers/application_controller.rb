@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
       redirect_to admin_path(current_user.admin.id), :alert => exception.message
     elsif current_user.seller?
       redirect_to seller_path(current_user.seller.id), :alert => exception.message
-    elsif current_user.student?
+    elsif current_user.customer?
       redirect_to customer_path(current_user.customer.id), :alert => exception.message
     end
   end

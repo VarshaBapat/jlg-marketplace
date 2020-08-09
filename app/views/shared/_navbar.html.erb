@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar navbar-expand-lg navbar-light bg-ligh">
   <a class="navbar-brand" href="#">
   <img src="#" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
   Just Like Granny</a>
@@ -22,14 +22,14 @@
         
     <% if user_signed_in? %>
     <li class="nav-item">
-        <%= link_to  "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <%= link_to  "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-default" %>
       </li>
     <% else %> 
     <li class="nav-item">
-    <%= link_to  "Sign Up", new_user_registration_path, class: "nav-link" %>
+    <%= link_to  "Sign Up", new_user_registration_path, class: "btn btn-default" %>
       </li>
       <li class="nav-item">
-        <%= link_to  "Sign In", new_user_session_path, class: "nav-link" %>
+        <%= link_to  "Sign In", new_user_session_path, class: "btn btn-default" %>
       </li>    
     <% end %>
       

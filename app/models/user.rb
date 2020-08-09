@@ -11,7 +11,8 @@ class User < ApplicationRecord
   
   has_one :customer, dependent: :destroy
   has_one :seller, dependent: :destroy
-  has_one :admin, dependent: :destroy  
+  has_one :admin, dependent: :destroy 
+  has_many :products, dependent: :destroy 
   
   validates :role, presence: true
 

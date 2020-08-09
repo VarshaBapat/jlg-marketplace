@@ -1,5 +1,14 @@
 <h1>Editing Review</h1>
 
+<%= simple_form_for([@product, @review]) do |f| %>
+
+<%= f.input :rating %>
+<%= f.input :comment %>
+<%= f.button :submit %>
+<% end %>
+
+
+
 <%= render 'form', review: @review %>
 
 <%= link_to 'Show', @review %> |

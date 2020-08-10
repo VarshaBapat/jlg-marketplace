@@ -12,13 +12,23 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= tag :meta, name: "stripe-public-key", content: Figaro.env.stripe_publishable_key %>
   </head>
-
+<div class="container">
   <body>
   <header>
-  <%= render 'shared/navbar' %>
+    <%= render 'shared/navbar' %>
   </header>
+  
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
+
+ 
+
+
+ <footer>
+    <%= render 'shared/footer' %>
+  </footer>
     <%= yield %>
+     
   </body>
+  </div>
 </html>

@@ -1,3 +1,16 @@
+
+<body>
+<div class="jumbotron text-center">
+
 <% name = current_user.present? ? current_user.email : "there!" %>
-<h1>Hi <%= name %></h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<h1 class="display-4">Hi <%= name %></h1>
+<p>Please sign in to order</p>
+<%= link_to  "Sign In", new_user_session_path, class: "btn btn-warning btn-lg" %>
+
+<br><br>
+
+<p>Don't have an account? Sign up now!</p>
+<%= link_to  "Sign Up", new_user_registration_path, class: "btn btn-warning btn-lg" %>
+<div>
+
+</body>

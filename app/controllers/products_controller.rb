@@ -60,13 +60,13 @@ class ProductsController < ApplicationController
     # puts @product.user
 
     @product = Product.create(product_params)
-    redirect_to root_path
+    # redirect_to root_path
 
-      # if @product.save
-      #   redirect_to root_path
-      # else
-      #   redirect_to :new
-      # end
+      if @product.save
+        redirect_to products_path
+      else
+        redirect_to new_product_path
+      end
   end
 
   # def create

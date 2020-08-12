@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+.sign-up-form,
+.sign-in-form {
+  margin: 5rem 40%;
+}
+
+.nav {
+  background-color: black;
+}

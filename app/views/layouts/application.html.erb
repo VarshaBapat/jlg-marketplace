@@ -19,19 +19,21 @@
       <%= render 'shared/navbar' %>
     </header>
 
-    <div class="container">
-    
+  
       <% if notice %><div class="alert alert-info"><%= notice %></div><% end %>
       <% if alert %><div class="alert alert-warning"><%= alert %></div><% end %>
 
       <!--<p class="notice"><%= notice %></p>-->
       <!--<p class="alert"><%= alert %></p>-->
-      <%= yield %>
-
-    </div>
      
+<%= yield %>
+ 
+     <div>
     <footer>
       <%= render 'shared/footer' %>
     </footer>
+    </div>
+  
   </body>
+  
 </html>

@@ -1,16 +1,40 @@
 
-<body>
+
+
 <div class="jumbotron text-center">
+    <div class="container">
 
-<% name = current_user.present? ? current_user.email : "there!" %>
-<h1 class="display-4">Hi <%= name %></h1>
-<p>Please sign in to order</p>
-<%= link_to  "Sign In", new_user_session_path, class: "btn btn-warning btn-lg" %>
+        <% name = current_user.present? ? current_user.email : "there!" %>
+        <h1 class="display-4">Hi <%= name %></h1>
 
-<br><br>
 
-<p>Don't have an account? Sign up now!</p>
-<%= link_to  "Sign Up", new_user_registration_path, class: "btn btn-warning btn-lg" %>
-<div>
+        <p>Please sign in to order</p>
+        <%= link_to  "Sign In", new_user_session_path, class: "btn btn-warning btn-lg" %>
 
-</body>
+        <br><br>
+
+        <p>Don't have an account? Sign up now!</p>
+        <%= link_to  "Sign Up", new_user_registration_path, class: "btn btn-warning btn-lg" %>
+    <div>
+</div>
+
+
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img src="..." class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+                </div>
+        </div>
+    </div>
+
+
+
+
+
